@@ -55,6 +55,15 @@ app.get('/json/authors/:id', (req, res) => {
   })
 })
 
+app.get('/json/authors/:id/books', (req, res) => {
+  const { id } = req.params
+  const books = authors[id - 1].books
+  res.json({
+    books: [`${books}`]
+  })
+})
+
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
 })
