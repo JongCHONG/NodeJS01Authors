@@ -38,6 +38,14 @@ app.get('/authors/:index', (req, res) => {
   res.send( `${author.name}, ${author.nationality}` )
 })
 
+//Exercice 3
+app.get('/authors/:index/books', (req, res) => {
+  const { index } = req.params
+  const books = authors[index - 1].books
+  res.send( books.join(', ') )
+})
+
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
 })
