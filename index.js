@@ -64,10 +64,10 @@ app.get('/json/authors/:id', (req, res) => {
 
 app.get('/json/authors/:id/books', (req, res) => {
   const { id } = req.params
-  const books = authors[id - 1].books
+  const author = authors[id - 1]
 
   res.json({
-    books: books
+    books: author.books
   })
 })
 
