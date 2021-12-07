@@ -35,20 +35,27 @@ app.get('/', (req, res) => {
 app.get('/authors/:index', (req, res) => {
   const { index } = req.params
   const author = authors[index - 1]
-  res.send( `${author.name}, ${author.nationality}` )
+
+  if (author) {
+    res.send( `${author.name}, ${author.nationality}` )
+  } else {
+    res.status(404).send("Not found") //si api n'est pas prêt
+  }
 })
 
 //Exercice 3
 app.get('/authors/:index/books', (req, res) => {
   const { index } = req.params
-  const books = authors[index - 1].books
-  res.send( books.join(', ') )
+  const book = authors[index - 1].books
+
+  res.send( book.join(', ') )
 })
 
 //Exercice 4
 app.get('/json/authors/:id', (req, res) => {
   const { id } = req.params
   const author = authors[id - 1]
+
   res.json({
     name: `${author.name}`,
     nationality: `${author.nationality}`
@@ -58,8 +65,9 @@ app.get('/json/authors/:id', (req, res) => {
 app.get('/json/authors/:id/books', (req, res) => {
   const { id } = req.params
   const books = authors[id - 1].books
+
   res.json({
-    books: [`${books}`]
+    books: books
   })
 })
 
